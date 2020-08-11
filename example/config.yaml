@@ -1,0 +1,34 @@
+counters:
+  - prefix: mock_metric_counter
+    number: 3
+    labels:
+    - name: app
+      valueset:
+      - "prometheus-mock-metrics-server"
+    - name: client_addr
+      valueset:
+      - "client1"
+      - "client2"
+      - "client3"
+  - prefix: mock_metric_request_total
+    labels:
+    - name: app
+      valueset:
+      - "prometheus-mock-metrics-server"
+    valuemode: http
+    
+gauges:
+  - prefix: mock_metric_gauges
+    number: 4
+    range:
+      upper: 1000
+      lower: 2
+    labels:
+    - name: app
+      valueset:
+      - "prometheus-mock-metrics-server"
+    - name: client_addr
+      valueset:
+      - "client1"
+      - "client2"
+      - "client3"

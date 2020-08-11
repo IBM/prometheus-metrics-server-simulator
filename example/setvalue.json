@@ -1,0 +1,11 @@
+{
+    "name":"mock_metric_request_total",
+    "labels":[
+        {
+            "name":"app",
+            "value": "prometheus-mock-metrics-server"
+        }
+    ],
+    
+    "value": 30
+}

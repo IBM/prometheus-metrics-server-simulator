@@ -1,0 +1,93 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prom-ms-config
+  namespace: default
+data:
+  config.yaml: |
+    counters:
+      - prefix: mock_metric_counter
+        number: 3
+        labels:
+        - name: app
+          valueset:
+          - "prometheus-mock-metrics-server"
+        - name: client_addr
+          valueset:
+          - "client1"
+          - "client2"
+          - "client3"
+      - prefix: mock_metric_request_total
+        labels:
+        - name: app
+          valueset:
+          - "prometheus-mock-metrics-server"
+        valuemode: http
+        
+    gauges:
+      - prefix: mock_metric_gauges
+        number: 4
+        range:
+          upper: 1000
+          lower: 2
+        labels:
+        - name: app
+          valueset:
+          - "prometheus-mock-metrics-server"
+        - name: client_addr
+          valueset:
+          - "client1"
+          - "client2"
+          - "client3"
+    
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-metrics-server-demo
+  namespace: default
+  annotations:
+    prometheus.io/scrape: "true"
+spec:
+  ports:
+  - name: metrics
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    name: prometheus-metrics-server-demo
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-metrics-server-demo
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: prometheus-metrics-server-demo
+  template:
+    metadata:
+      labels:
+        name: prometheus-metrics-server-demo
+    spec:
+      containers:
+        - name: metrics
+          image: quay.io/dybo/prometheus-metrics-server-simulator-amd64:v20200811-3497888
+          command:
+          - prometheus-metrics-server-simulator
+          imagePullPolicy: Always
+          volumeMounts:
+          - mountPath: /etc/conf
+            name: config
+      volumes:
+      - configMap:
+          defaultMode: 444
+          name: prom-ms-config
+          items:
+          - key: config.yaml
+            path: config.yaml
+        name: config
