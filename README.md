@@ -1,4 +1,4 @@
-# prometheus-metrics-server-exmaple
+# prometheus-metrics-server-simulator
 
 A configurable prometheus metrics server simulator. It can be configured to generate different number of metrics with different labels. An example is file `example/config.yaml`. In `example/openshift.yaml` it demos how to generate configmap for it..
 
