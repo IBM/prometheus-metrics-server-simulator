@@ -47,6 +47,8 @@ kind: Service
 metadata:
   name: prometheus-metrics-server-demo
   namespace: default
+  labels:
+    name: prometheus-metrics-server-demo
   annotations:
     prometheus.io/scrape: "true"
 spec:

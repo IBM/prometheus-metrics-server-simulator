@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: prometheus-metrics-server-demo
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      name: prometheus-metrics-server-demo
+  endpoints:
+  - scheme: http
+    port: metrics
