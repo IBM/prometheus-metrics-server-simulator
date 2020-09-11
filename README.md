@@ -3,6 +3,7 @@
 A configurable prometheus metrics server simulator. It can be configured to generate different number of metrics with different labels. An example is file `example/config.yaml`. In `example/openshift.yaml` it demos how to generate configmap for it..
 
 # User Cases
+
 1. It can be used as metrics endpoint/gateway of workload by setting metric values via http API 
    
    ![UC1](images/usercase1.png)  
