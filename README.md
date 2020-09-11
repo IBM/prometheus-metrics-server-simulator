@@ -21,6 +21,7 @@ A configurable prometheus metrics server simulator. It can be configured to gene
 4. Open `<CP console>/prometheus` to check the existence of metrics
 
 # Configration syntax
+
 ```
 counters:
   - prefix: mock_metric_counter
