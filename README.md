@@ -13,6 +13,7 @@ A configurable prometheus metrics server simulator. It can be configured to gene
    
 
 # Steps
+
 1. Install Openshift and IBM Bedrock Monitoring Service
 2. Optionally you can edit the configmap defined in `example/openshift.yaml` file to change generated metrics.
 3. `oc create -f example/openshift.yaml`
